@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer List</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+</head>
+<body>
+  <h1>Customer List</h1>
+  <div class="container">
+
+  <div class="customer_details">
+    <h3>{{customer.first_name }} {{customer.last_name}}</h3>
+    <p><strong>Phone: </strong> {{customer.phone }} </p>
+    <p><strong>Email </strong> {{customer.email }} </p>
+    <p><strong>Address: </strong> {{customer.phone }} </p>
+    <p><strong>Created_at: </strong> {{customer. }} </p>
+  </div>
+  
+    <a href="{% url 'customer_list'%}" class="back-link">Back to </a>
+  </div>
+  
+
+</body>
+</html>

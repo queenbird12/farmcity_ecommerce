@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WELCOME TO FARMCITY</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+  <h1>Product</h1>
+  <ul>
+    {% for Product in products%}
+        <li>{{Product.name}}</li>
+        <li>{{Product.description}}</li>
+        <li>Price{{Product.Price}}</li>
+        <img src="{{Product.image.url}}"> alt="{{Product.name}}">
+    </ul>
+    {% endfor %}
+</body>
+</html>
