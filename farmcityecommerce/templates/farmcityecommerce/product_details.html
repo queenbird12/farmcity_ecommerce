@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>{{product.name}}</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content%}
+<!--<div class="row">
+<div class>= "col-lg-4">
+  <img class="thumbail" src="{% static 'img/'}"
+</div>
+</div>
 
-</head>
-<body>
-  <h1>{{product.name}}</h1>
-  <ul>
-    {% for Product in product %}
-        <li>
-            <h2>{{Product.name}}</h2>
-            <p>{{Product.description}}</p>
-            <p>Price: Ksh{{Product.Price}}</p>
-            <img src="{{Product.image.url}}"> alt="{{Product.name}}">
-            <p> available: {{product.available| yesno: "yes,no"}}</p>
-        </li>
-
-    </ul>
-    {% endfor %}
-</body>
-</html>
+-->
+{% endblock content%}
