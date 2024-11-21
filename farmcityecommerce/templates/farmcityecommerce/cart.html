@@ -13,17 +13,17 @@
                         <span>All departments</span>
                     </div>
                     <ul>
-                        <li><a href="#">Fresh Meat</a></li>
+                        <li><a href="#">Foodstuffs</a></li>
                         <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
+                        <li><a href="#">Grains & Cereals</a></li>
+                        <li><a href="#">Fresh Fruits</a></li>
+                        <li><a href="#">Beauty Products</a></li>
+                        <li><a href="#">Drinks & Beverages</a></li>
+                        <li><a href="#">Fresh Farm Products</a></li>
+                        <li><a href="#">Toiletries</a></li>
+                        <li><a href="#">Animal Feeds</a></li>
+                        <li><a href="#">Animal Health</a></li>
+                        <li><a href="#">Crop Care</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,8 +54,94 @@
     </div>
 </section>
 <!-- Hero Section End -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <!-- Cart Header -->
+        <div class="row mb-4">
+            <div class="col-lg-12">
+                <table class="shoping__cart__table w-100">
+                    <tr>
+                        <th><h5>Items: <strong>3</strong></h5></th>
+                        <th><h5>Total: <strong>ksh 43</strong></h5></th>
+                        <th>
+                            <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'farmcityecommerce:checkout' %}">
+                                Checkout
+                            </a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-<!-- Breadcrumb Section Begin -->
+        <!-- Cart Items -->
+        <div class="container">
+            <div class="cart-row d-flex justify-content-between align-items-center mb-3">
+                <div style="flex: 2"><strong>Item</strong></div>
+                <div style="flex: 1"><strong>Price</strong></div>
+                <div style="flex: 1"><strong>Quantity</strong></div>
+                <div style="flex: 1"><strong>Total</strong></div>
+            </div>
+
+            <!-- Example Cart Item -->
+            <div class="cart-row d-flex justify-content-between align-items-center mb-3">
+                <div style="flex: 2" class="d-flex align-items-center">
+                    <img class="row-image mr-3" src="{% static 'img/cart/cart-1.jpg' %}" alt="Product Image" style="width: 60px; height: 60px; border-radius: 5px;">
+                    <span>Product1</span>
+                </div>
+                <div style="flex: 1">ksh 20</div>
+                <div style="flex: 1" class="quantity-control">
+                    <div class="d-flex align-items-center">
+                        <img class="chg-quantity mr-2" src="{% static 'img/arrowup.png' %}">
+                        <span>1</span>
+                        <img class="chg-quantity ml-2" src="{% static 'img/arrowdown.png' %}">
+                    </div>
+                </div>
+                <div style="flex: 1">ksh 40</div>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="row mt-4">
+            <!-- Continue Shopping and Update Cart -->
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns d-flex justify-content-between">
+                    <a href="{% url 'farmcityecommerce:home' %}" class="btn btn-primary">CONTINUE SHOPPING</a>
+                    <a href="#" class="btn btn-outline-primary">
+                        <span class="icon_loading"></span> Update Cart
+                    </a>
+                </div>
+            </div>
+
+            <!-- Discount Code -->
+            <div class="col-lg-6 mt-4">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Discount Codes</h5>
+                        <form action="#">
+                            <input type="text" class="form-control mb-3" placeholder="Enter your coupon code">
+                            <button type="submit" class="btn btn-secondary">APPLY COUPON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Total -->
+            <div class="col-lg-6 mt-4">
+                <div class="shoping__checkout">
+                    <h5>Cart Total</h5>
+                    <ul class="list-unstyled">
+                        <li>Subtotal: <span>$454.98</span></li>
+                        <li>Total: <span>$454.98</span></li>
+                    </ul>
+                    <a href="{% url 'farmcityecommerce:checkout' %}" class="btn btn-success">PROCEED TO CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Breadcrumb Section Begin 
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
@@ -70,29 +156,52 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- Breadcrumb Section End -->
 
-<!-- Shoping Cart Section Begin -->
+<!-- Shoping Cart Section Begin 
 <section class="shoping-cart spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
+                    <table class="shoping__cart__table">
                             <tr>
-                                <th class="shoping__product">Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
+                                <th><h5>Items: <strong>3</strong></h5></th>
+                                <th><h5>Total: <strong>ksh 43</strong></h5></th>
+
+                                <th>
+                                    <a style="float:right; margin:5px" class="btn btn success"
+                                    href="{% url 'farmcityecommerce:checkout' %}">Checkout</a>
+                                </th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
+                    </table>
+            </div>
+
+            <div class ="container">
+                <div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2"><strong>Item</strong></div>
+                    <div style="flex:2"><strong>Price</strong></div>
+                    <div style="flex:2"><strong>Quantity</strong></div>
+                    <div style="flex:2"><strong>Total</strong></div>
+                </div>
+
+                <div class="cart-row">
+                    <div style="flex:2"><img class= "row-image" src="{% static 'img/cart/cart-1.jpg' %}"></div>
+                    <div style="flex:2">Product1</div>
+                    <div style="flex:1">>ksh 20</div>
+                    <div style="flex:1">
+                        <p class = "quantity"></p>
+                        <div class= "quantity">
+                            <img class="chg-quantity" src="{% static 'images/arrowup.png' %}">
+                            <img class="chg-quantity" src="{% static 'images/arrowdown.png' %}">
+                        </div>
+                    </div>
+                    <div style="flex:1">$40</div>
+                </div>
+            </div>
+                                <!--<td class="shoping__cart__item">
+                                    <img src="{% static 'img/cart/cart-1.jpg' %}" alt="">
                                     <h5>Vegetable’s Package</h5>
                                 </td>
                                 <td class="shoping__cart__price">
@@ -114,7 +223,7 @@
                             </tr>
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-2.jpg" alt="">
+                                    <img src="{% static 'img/cart/cart-2.jpg' %}" alt="">
                                     <h5>Fresh Garden Vegetable</h5>
                                 </td>
                                 <td class="shoping__cart__price">
@@ -136,7 +245,7 @@
                             </tr>
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-3.jpg" alt="">
+                                    <img src="{% static 'img/cart/cart-3.jpg' %}" alt="">
                                     <h5>Organic Bananas</h5>
                                 </td>
                                 <td class="shoping__cart__price">
@@ -160,13 +269,13 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div> -->
+       <!-- <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="{% url 'farmcityecommerce:home' %}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                     <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                        Upadate Cart</a>
+                        Update Cart</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -187,12 +296,12 @@
                         <li>Subtotal <span>$454.98</span></li>
                         <li>Total <span>$454.98</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="{% url 'farmcityecommerce:checkout' %}" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- Shoping Cart Section End -->
 
 {% endblock content %}

@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'farmcityecommerce', 
-    'userauths',
 ]
 
 MIDDLEWARE = [
@@ -139,5 +138,3 @@ JAZZMIN_SETTINGS = {
     'site_logo': "img/logo.png",
     'copyright':"farmcity.ecommerce.com"
 }
-
-AUTH_USER_MODEL = 'userauths.user'
