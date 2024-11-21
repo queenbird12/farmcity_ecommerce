@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404,render
 from django.http import HttpResponse
-from .models import Product
-from .models import Customer
+from .models import *
 
 # Create your views here.
 def home(request):
@@ -12,8 +11,13 @@ def home(request):
     return render(request, 'farmcityecommerce/home.html',context)
 
 def cart(request):
-    context= {
-    }
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete= False)
+        items= order.orderitem_set.all()
+    else:
+        items = []
+    context= {'items': items}
     return render(request, 'farmcityecommerce/cart.html',context)
 
 def checkout(request):
