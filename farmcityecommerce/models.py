@@ -18,8 +18,8 @@ class Product(models.Model):
     name = models.CharField(max_length=300,null=True)
     description= models.TextField()
     price= models.FloatField()
-    #image= models.ImageField(upload_to='products/')
     Availability = models.BooleanField(default=False,null=True,blank=False)
+    image = models.ImageField(upload_to='product/' ,null=True, blank=True)
 
     def __str__(self):
         return self.name

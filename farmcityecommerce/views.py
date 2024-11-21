@@ -5,10 +5,15 @@ from .models import Customer
 
 # Create your views here.
 def home(request):
-    return render(request, 'farmcityecommerce/home.html')
+    products =Product.objects.all()
+    context = {
+        'products': products
+    }
+    return render(request, 'farmcityecommerce/home.html',context)
 
 def cart(request):
-    context= {}
+    context= {
+    }
     return render(request, 'farmcityecommerce/cart.html',context)
 
 def checkout(request):

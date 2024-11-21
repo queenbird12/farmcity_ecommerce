@@ -2,103 +2,6 @@
 {% load static %}
 {% block content%}
     <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Foodstuffs</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Grains & Cereals</a></li>
-                            <li><a href="#">Fresh Fruits</a></li>
-                            <li><a href="#">Beauty Products</a></li>
-                            <li><a href="#">Drinks & Beverages</a></li>
-                            <li><a href="#">Fresh Farm Products</a></li>
-                            <li><a href="#">Toiletries</a></li>
-                            <li><a href="#">Animal Feeds</a></li>
-                            <li><a href="#">Animal Health</a></li>
-                            <li><a href="#">Crop Care</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+254797276007</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg' %}">
-                        <div class="hero__text">
-                            <span>FRESH PRODUCE</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
-
-    <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
-            <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-1.jpg' %}">
-                            <h5><a href="#">Fresh Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
-                            <h5><a href="#">Drinks</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-5.jpg' %}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Categories Section End -->
-
-    <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
             <div class="row">
@@ -119,74 +22,27 @@
             </div>
             <div class="row featured__filter">
                 <!-- First Product -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                 {% for product in products %}
+                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="featured__item">
-                        <img class="thumbnail" src="{% static 'img/featured/feature-1.jpg' %}" alt="Product Image">
-                        <hr>
-                        <div class="featured__item__text">
-                            <h6><strong>Product</strong></h6>
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                            <a class="btn btn-outline-success" href="#">View</a>
-                            <h4 style="display: inline-block; float: right;">ksh 20</h4>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Second Product -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="featured__item">
-                        <img class="thumbnail" src="{% static 'img/featured/feature-2.jpg' %}" alt="Product Image">
-                        <hr>
-                        <div class="featured__item__text">
-                            <h6><strong>Product</strong></h6>
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                            <a class="btn btn-outline-success" href="#">View</a>
-                            <h4 style="display: inline-block; float: right;">ksh 20</h4>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Third Product -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="featured__item">
-                        <img class="thumbnail" src="{% static 'img/featured/feature-3.jpg' %}" alt="Product Image">
-                        <hr>
-                        <div class="featured__item__text">
-                            <h6><strong>Product</strong></h6>
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                            <a class="btn btn-outline-success" href="#">View</a>
-                            <h4 style="display: inline-block; float: right;">ksh 20</h4>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Fourth Product -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="featured__item">
-                        <img class="thumbnail" src="{% static 'img/featured/feature-4.jpg' %}" alt="Product Image">
-                        <hr>
-                        <div class="featured__item__text">
-                            <h6><strong>Product</strong></h6>
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                            <a class="btn btn-outline-success" href="#">View</a>
-                            <h4 style="display: inline-block; float: right;">ksh 20</h4>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            
+                         <img class="thumbnail" src="{{ product.image.url }}">
+                         <hr>
+                         <div class="featured__item__text">
+                            <h6><strong>{{ product.name }}</strong></h6>
+                             <hr>
+                             <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                             <a class="btn btn-outline-success" href="#">View</a>
+                             <h4 style="display: inline-block; float: right;">ksh 20</h4>
+                             <hr>
+                         </div>
+                     </div>
+                 </div>
+                 {% endfor%}
                 <!-- Additional products can follow the same pattern -->
             </div>
             
     </section>
-    <!-- Featured Section End -->
+    
 
     <!-- Banner Begin -->
     <div class="banner">
