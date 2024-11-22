@@ -1,8 +1,45 @@
-from django.shortcuts import get_object_or_404,render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.contrib import messages
+
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
+from .forms import CreateUserForm
+def registerPage(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get("username")
+            messages.success(request, f"hey{user} ,your account was created")
+            return redirect('farmcityecommerce:login')  
+            
+    context = {'form':form}
+    return render(request, 'farmcityecommerce/register.html',context)
+
+def loginPage(request):
+    if request.method == 'POST':
+        username= request.POST.get('username')
+        password= request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # Redirect to 'next' or homepage
+            return redirect('farmcityecommerce:home')
+        else: 
+            messages.info(request, 'Username or password is incorrect')
+    context = {}
+    return render(request, 'farmcityecommerce/login.html',context)
+def logoutUser(request):
+    return redirect('farmcityecommerce:login')
+
 def home(request):
     products =Product.objects.all()
     context = {
@@ -35,3 +72,6 @@ def checkout(request):
 def main(request):
     context = {}
     return render(request, 'farmcityecommerce/main.html',context)
+
+def updateItem(request):
+    return JsonResponse('Item was added',safe=False)

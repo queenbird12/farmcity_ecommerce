@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px; border-radius: 10px;">
+        <div class="text-center mb-4">
+            <h3 id="form-title">Login</h3>
+        </div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="username">Username</label>
+                <input 
+                        type="username" 
+                        id="username" 
+                        name="username" 
+                        class="form-control" 
+                        placeholder="Enter your username" 
+                        required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-control" 
+                        placeholder="Enter your password" 
+                        required>
+            </div>
+            <input type="hidden" name="next" value="{% url 'farmcityecommerce:home' %}">
+            <button type="submit" class="btn btn-primary w-100">Log In</button>
+        </form>
+            {% for message in messages %}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
+        <div class="form-footer text-center mt-3">
+            <p>Don't have an account? <a href="{% url 'farmcityecommerce:register' %}">Sign Up</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
