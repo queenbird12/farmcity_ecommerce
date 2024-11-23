@@ -25,13 +25,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <script type="text/javascript">
         var user = '{{request.user}}'
-        
-        function getCookie(name) {
+
+        function getToken(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
                 // Does this cookie string begin with the name we want?
                 if (cookie.substring(0, name.length + 1) === (name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
@@ -40,8 +40,8 @@
             }
         }
         return cookieValue;
-     }
-     var csrftoken = getCookie('csrftoken');
+    }
+        const csrftoken = getToken('csrftoken');
     </script>
 </head>
 
@@ -57,13 +57,6 @@
         <div class="humberger__menu__logo">
             <a href="#"><img src="{% static 'img/logo.png' %}" alt="logo"></a>
         </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
        <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="{% static 'img/language.png' %}" alt=""> 
@@ -73,9 +66,6 @@
                     <li><a href="#">Kiswahili</a></li>
                     <li><a href="#">English</a></li>
                 </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="{% url 'farmcityecommerce:login' %}" class="btn btn-primary">LogIn</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -140,9 +130,8 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
-                            </div>
+                            <span>Hello,{{request.user}}</span>
+                            <span><a href="{% url 'farmcityecommerce:logout' %}">Logout</a></span>
                         </div>
                     </div>
                 </div>
@@ -176,10 +165,9 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{% url 'farmcityecommerce:cart' %}"><i class="fa fa-shopping-bag"></i> <span>{{cartItems}}</a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <!--<div class="header__cart__price">item: <span>{$150.00}</span></div>-->
                     </div>
                 </div>
             </div>
