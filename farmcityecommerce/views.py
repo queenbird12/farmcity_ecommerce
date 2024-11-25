@@ -1,15 +1,19 @@
 import json
+import datetime
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib import messages
 
+#from django.db.utils import IntegrityError
+
+
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-
-# Create your views here.
 from .forms import CreateUserForm
+
+
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -38,22 +42,42 @@ def loginPage(request):
             messages.info(request, 'Username or password is incorrect')
     context = {}
     return render(request, 'farmcityecommerce/login.html',context)
+
 def logoutUser(request):
     return redirect('farmcityecommerce:login')
 
 def home(request):
-        if request.user.is_authenticated:
+    # Fetch all products to display on the homepage
+    products = Product.objects.all()
+
+    cartItems = 0  # Default value for cart items
+
+    if request.user.is_authenticated:
+        try:
+            # Fetch the customer object for the authenticated user
             customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete= False)
-            items= order.orderitem_set.all()
-            cartItems = order.get_cart_items
-        else:
-            items = []
-            order = {'get_cart_total':0, 'get_cart_items':0}
-            cartItems = order['get_cart_items']
-        products =Product.objects.all()
-        context = {'products': products, 'cartItems':cartItems}
-        return render(request, 'farmcityecommerce/home.html',context)
+        except Customer.DoesNotExist:
+            # Create a customer object if it doesn't exist
+            customer = Customer.objects.create(user=request.user, email=request.user.email)
+
+        # Get or create an order for the customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+        # Fetch all items in the current order
+        items = order.orderitem_set.all()
+
+        # Update cart items count from the order
+        cartItems = order.get_cart_items
+    else:
+        # For unauthenticated users, provide default values
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+
+    # Pass data to the template
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'farmcityecommerce/home.html', context)
+
 
 def cart(request):
     if request.user.is_authenticated:
@@ -104,3 +128,7 @@ def updateItem(request):
     if orderItem.quantity <= 0:
         orderItem.delete()
     return JsonResponse('ITEM WAS ADDED', safe=False)
+
+def processOrder(request):
+    print('data:',request.body)
+    return JsonResponse('payment complete!', safe=False)

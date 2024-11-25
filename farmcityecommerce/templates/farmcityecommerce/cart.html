@@ -41,7 +41,7 @@
                 <div style="flex: 1">Price: {{ item.product.price|floatformat:2 }}</div>
                 <div style="flex: 1" class="quantity-control">
                     <div class="d-flex align-items-center">
-                        <img data-product={{item.product.id}} onclick="add" class="chg-quantity updatecart" src="{% static 'img/arrowup.png' %}">
+                        <img data-product={{item.product.id}} data-action="add" class="chg-quantity updatecart" src="{% static 'img/arrowup.png' %}">
                    
                    <!-- Display Quantity -->
                         <span id="quantity-display-{{ item.id }}" class="mx-2">{{ item.quantity }}</span>
@@ -80,7 +80,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Cart Total -->
+
+        
 </section>
 {% endblock content %}
