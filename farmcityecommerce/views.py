@@ -130,5 +130,26 @@ def updateItem(request):
     return JsonResponse('ITEM WAS ADDED', safe=False)
 
 def processOrder(request):
-    print('data:',request.body)
+    transaction_id= datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete= False)
+        total = float (data['form']['total'])
+        order.transction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+            order.save()
+            if order.shipping:
+                ShippingAddress.objects.create(
+                    customer=customer,
+                    order=order,
+                    address=data['shipping']['address'],
+                    city=data['shipping']['city'],
+                    county=data['shipping']['county'],
+                    town=data['shipping']['town'],
+                )
+    else:
+        print('user is not logged in')
     return JsonResponse('payment complete!', safe=False)
