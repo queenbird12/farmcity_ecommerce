@@ -12,39 +12,48 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import CreateUserForm
+from django.contrib.auth.decorators import login_required
 
 
 def registerPage(request):
-    form = CreateUserForm()
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get("username")
-            messages.success(request, f"hey{user} ,your account was created")
-            return redirect('farmcityecommerce:login')  
+    if request.user.is_authenticated:
+        return redirect('farmcityecommerce:home')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get("username")
+                messages.success(request, f"hey{user} ,your account was created")
+                return redirect('farmcityecommerce:login')  
             
     context = {'form':form}
     return render(request, 'farmcityecommerce/register.html',context)
 
 def loginPage(request):
-    if request.method == 'POST':
-        username= request.POST.get('username')
-        password= request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('farmcityecommerce:home')
+    else:
+        if request.method == 'POST':
+            username= request.POST.get('username')
+            password= request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            # Redirect to 'next' or homepage
-            return redirect('farmcityecommerce:home')
-        else: 
-            messages.info(request, 'Username or password is incorrect')
+            if user is not None:
+                login(request, user)
+                # Redirect to 'next' or homepage
+                return redirect('farmcityecommerce:home')
+            else: 
+                messages.info(request, 'Username or password is incorrect')
     context = {}
     return render(request, 'farmcityecommerce/login.html',context)
 
 def logoutUser(request):
+    logout(request)
     return redirect('farmcityecommerce:login')
+
 
 def home(request):
     # Fetch all products to display on the homepage
@@ -78,7 +87,7 @@ def home(request):
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'farmcityecommerce/home.html', context)
 
-
+@login_required(login_url='farmcityecommerce:login')
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -90,7 +99,7 @@ def cart(request):
         order = {'get_cart_total':0, 'get_cart_items':0}
     context= {'items': items,'order':order}
     return render(request, 'farmcityecommerce/cart.html',context)
-
+@login_required(login_url='farmcityecommerce:login')
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -106,7 +115,7 @@ def checkout(request):
 def main(request):
     context = {}
     return render(request, 'farmcityecommerce/main.html',context)
-
+@login_required(login_url='farmcityecommerce:login')
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -128,7 +137,7 @@ def updateItem(request):
     if orderItem.quantity <= 0:
         orderItem.delete()
     return JsonResponse('ITEM WAS ADDED', safe=False)
-
+@login_required(login_url='farmcityecommerce:login')
 def processOrder(request):
     transaction_id= datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -153,3 +162,23 @@ def processOrder(request):
     else:
         print('user is not logged in')
     return JsonResponse('payment complete!', safe=False)
+@login_required(login_url='farmcityecommerce:login')
+def process_payment(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        payment_method = data.get('paymentMethod')
+        order_id = data.get('orderId')
+        amount = data.get('amount')
+
+        try:
+            order = Order.objects.get(id=order_id)
+            Payment.objects.create(
+                order=order,
+                method=payment_method,
+                amount=amount,
+                approved=False,  # Admin approval required
+            )
+            return JsonResponse({'success': True})
+        except Order.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Order not found.'})
+    return JsonResponse({'success': False, 'message': 'Invalid request.'})

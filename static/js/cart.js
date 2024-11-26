@@ -37,3 +37,35 @@ function updateUserOrder(productId, action){
         location.reload()
     });
 }
+function processOrder(paymentMethod) {
+    const orderData = {
+        paymentMethod: paymentMethod,
+        orderId: 'order-id-goes-here', // Replace with the actual order ID
+        amount: 0.01, // Replace with the actual order amount
+    };
+
+    fetch('/process_payment/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(), // Include CSRF token for security
+        },
+        body: JSON.stringify(orderData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert('Payment recorded. Waiting for admin approval.');
+            } else {
+                alert('Payment failed: ' + data.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Error processing payment:', error);
+        });
+}
+
+// Helper function to retrieve the CSRF token
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}

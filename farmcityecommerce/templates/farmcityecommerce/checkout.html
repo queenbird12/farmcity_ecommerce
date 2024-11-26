@@ -97,6 +97,14 @@
                     <div class="form-check mb-3" id="paymentOption">
                         <small>Payment Option</small>
                         <div id="paypal-button-container"></div>
+                        <button id="mpesa-button">
+                            <img src="{% static 'img/cash.png' %}" alt="Cash" style="width: auto; height: auto;">
+                            Pay with Cash
+                        </button>
+                        <button id="mpesa-button">
+                            <img src="{% static 'img/mpesa.png' %}" alt="M-Pesa" style="width: auto; height: auto;">
+                            Pay with M-Pesa
+                        </button>
                     <!--    <button id="make-payment">make payment</button>-->
                 </div>
             </div>
@@ -150,6 +158,19 @@
         document.getElementById('form-button').classList.add('hidden')
         document.getElementById('paymentOption').classList.remove('hidden')
     })
+    document.getElementById('cash-payment').addEventListener('click', function () {
+    // Simulate cash payment
+    alert('Cash payment initiated. Await admin approval.');
+    // Send the payment data to the server for admin approval
+    processOrder('cash');
+    });
+
+    document.getElementById('mpesa-payment').addEventListener('click', function () {
+        // Simulate M-Pesa payment
+        alert('M-Pesa payment initiated. Await admin approval.');
+        // Send the payment data to the server for admin approval
+        processOrder('mpesa');
+    });
     /*
     document.getElementById('make-payment').addEventListener('click',function(e){
         submitFormData()
