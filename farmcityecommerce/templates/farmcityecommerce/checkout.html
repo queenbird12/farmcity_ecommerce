@@ -1,33 +1,11 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Hero Section Begin -->
-    <!-- Hero Section End -->
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./home.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
-    <!-- Checkout Section Begin -->
-    <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
         <div class="row">
             <!-- User and Shipping Information -->
-            <div class="col-lg-6">
+            <div class="col-lg-6 mb-4">
                 <form id="form">
                     <div id="user-info">
                         <h4>Billing Information</h4>
@@ -98,11 +76,11 @@
                         <small>Payment Option</small>
                         <div id="paypal-button-container"></div>
                         <button id="mpesa-button">
-                            <img src="{% static 'img/cash.png' %}" alt="Cash" style="width: auto; height: auto;">
+                            <img src="{% static 'img/cash.png' %}" alt="Cash" style="width: 50px; height: auto;">
                             Pay with Cash
                         </button>
                         <button id="mpesa-button">
-                            <img src="{% static 'img/mpesa.png' %}" alt="M-Pesa" style="width: auto; height: auto;">
+                            <img src="{% static 'img/mpesa.png' %}" alt="M-Pesa" style="width: 50px; height: auto;">
                             Pay with M-Pesa
                         </button>
                     <!--    <button id="make-payment">make payment</button>-->

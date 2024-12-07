@@ -112,9 +112,13 @@ def checkout(request):
     context= {'items': items,'order':order}
     return render(request, 'farmcityecommerce/checkout.html',context)
 
-def main(request):
-    context = {}
-    return render(request, 'farmcityecommerce/main.html',context)
+def product(request, pk):
+    product = Product.objects.get(id=pk)
+    context = {
+        'product': product
+        }
+    return render(request, 'farmcityecommerce/product.html',context)
+
 @login_required(login_url='farmcityecommerce:login')
 def updateItem(request):
     data = json.loads(request.body)
